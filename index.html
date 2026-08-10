@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазины</title>
+    <style>
+        :root {
+            --accent-blue: #2A8BF3;
+            --border-gray: #E0E0E0;
+            --bg-light: #F5F5F5;
+        }
+        
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f9f9f9; 
+            margin: 0; padding: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .screen {
+            display: none; /* По умолчанию все экраны скрыты */
+            flex-grow: 1; 
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .active { 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        header { 
+            text-align: center; 
+            padding: 15px 0; 
+            background: #121212; 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+            border-bottom: 1px solid #ddd;
+        }
+        h1 { margin: 0; font-size: 18px; letter-spacing: 0.5px; }
+        
+        button.back-btn { 
+            background: none; 
+            border: none; 
+            color: white; 
+            font-size: 24px; 
+            cursor: pointer; 
+            width: 40px;
+         }
+         
+        .content { flex-grow: 1; padding: 16px; }
+        
+        /* Баннеры */
+        .ad-grid { display: grid; gap: 8px; padding: 16px 0; margin-bottom: 20px; }
+        .ad-block { background: #f5f5f5; padding: 16px; border-radius: 8px; text-align: center; color: #757575; min-height: 60px; display:flex; align-items:center; justify-content:center; }
+        
+        /* Кнопки навигации внизу */
+        .footer-nav { 
+            display: flex; 
+            justify-content: space-around; 
+            background: white; 
+            padding: 12px; 
+            border-top: 1px solid #E0E0E0; 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 10;
+         }
+        .role-btn { 
+            flex: 1; 
+            padding: 12px; 
+            background: white; 
+            color: #757575; 
+            border: 1px solid #E0E0E0; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            cursor: pointer; 
+            text-transform: uppercase;
+         }
+         .btn-active { 
+            background-color: var(--accent-blue); 
+            color: white; 
+            border-color: var(--accent-blue);
+         }
+         
+         /* Стили форм */
+         input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 16px;
+         }
+         label { display: block; margin-bottom: 8px; color: #212121; font-weight: bold; }
+         .submit-btn { 
+            width: 100%; 
+            padding: 14px; 
+            background-color: #2A8BF3; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            cursor: pointer;
+         }
+    </style>
+</head>
+<body>
+
+    <!-- ЭКРАН №1: Главная страница -->
+    <div id="home" class="screen active">
+        <header><h1>МАГАЗИНЫ</h1></header>
+        <div class="content">
+            <div class="ad-grid">
+                <div class="ad-block">Баннер 1</div>
+                <div class="ad-block">Баннер 2</div>
+                <div class="ad-block">Баннер 3</div>
+                <div class="ad-block">Баннер 4</div>
+                <div class="ad-block">Баннер 5</div>
+                <div class="ad-block">Баннер 6</div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div style="padding:15px; border-bottom:1px solid #eee;"><strong>ВкусВилл</small></div>
+                <div style="padding:15px; border-bottom:1px solid #eee;"><strong>Пятёрочка</small></div>
+            </div>
+        </div>
+        <footer class="footer-nav">
+            <button class="role-btn btn-active" onclick="showScreen('register')">Предприниматель</button>
+            <button class="role-btn" onclick="alert('Экран покупателя активен')">Покупатель</button>
+            <button class="role-btn" onclick="alert('Раздел администратора')">Админ</button>
+        </footer>
+    </div>
+
+    <!-- ЭКРАН РЕГИСТРАЦИИ (№3) -->
+    <div id="register" class="screen">
+        <header><h1>Регистрация</h1></header>
+        <div class="content">
+            <form onsubmit="event.preventDefault(); alert('Форма отправлена!');">
+                <label>Логин:</label>
+                <input type="text" placeholder="Ivan_Ivanov" required>
+                
+                <label>Пароль:</label>
+                <input type="password" placeholder="Ваш пароль" required>
+                
+                <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script>
+// --- ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ЭКРАНОВ ---
+function showScreen(id) {
+    // Скрываем ВСЕ экраны
+    document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+    
+    // Показываем нужный
+    document.getElementById(id).classList.add('active');
+    
+    // Управление кнопками футера
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('btn-active'));
+    event.target.classList.add('btn-active');
+}
+</script>
+</html>
