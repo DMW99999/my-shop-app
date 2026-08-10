@@ -4,44 +4,161 @@
     <meta charset="UTF-8">
     <title>Магазины</title>
     <style>
-        :root { --accent:#2A8BF3; --gray:#757575; }
-        body{margin:0;padding:0;font-family:Arial,sans-serif;background:#f9f9f9;}
-        .screen{display:none;height:calc(100vh - 60px);overflow-y:auto;padding:16px;}
-        .active{display:flex !important; flex-direction:column;}
-        header{background:#121212;color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:10;}
-        h1{margin:0;font-size:18px;}
-        footer{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:12px;}
-        .nav-btn{flex:1;padding:10px;text-align:center;cursor:pointer;text-transform:uppercase;font-size:14px;}
-        .nav-active{border-bottom:2px solid var(--accent); color:var(--accent);}
-        .ad-grid{display:grid;gap:8px;padding:16px 0;}
-        .ad-block{background:#f5f5f5;padding:16px;border-radius:8px;text-align:center;min-height:50px;}
-        .shop-item{padding:15px; border-bottom:1px solid #eee; display:flex; align-items:center;}
-        .logo{width:40px;height:40px;background:#ddd;border-radius:8px;margin-right:12px;display:flex;align-items:center;justify-content:center;color:#777;font-weight:bold;}
-        .form-wrap{max-width:400px;margin:40px auto;background:white;padding:25px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-        input, textarea{width:100%;padding:12px;margin-bottom:15px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;}
-        button{width:100%;padding:14px;background:#2A8BF3;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;}
+        :root {
+            --accent-blue: #2A8BF3;
+            --border-gray: #E0E0E0;
+            --bg-light: #F5F5F5;
+        }
+        
+        /* --- Глобальные стили --- */
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f9f9f9; 
+            margin: 0; padding: 0; 
+            height: 100vh; display: flex; flex-direction: column; 
+        }
+        .container { 
+            max-width: 600px; width: 100%; margin: auto; 
+            background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            overflow: hidden; display: flex; flex-direction: column; height: 100vh; 
+        }
+        header { text-align:center; padding:15px 0; background:#121212; color:white; position:sticky; top:0; z-index:10; }
+        h1 { margin:0; font-size:18px; letter-spacing:0.5px; }
+        
+        .content { 
+            flex-grow:1; 
+            overflow-y:auto; 
+            padding:16px; 
+            padding-bottom: 80px; /* Отступ под футер */
+         }
+         
+        /* Баннеры */
+        .ad-grid { display:grid; gap:8px; padding:16px 0; margin-bottom:20px; grid-template-columns: repeat(2, 1fr); }
+        .ad-block { background:#f5f5f5; padding:16px; border-radius:8px; text-align:center; color:#757575; min-height:40px; display:flex; align-items:center; justify-content:center; }
+        
+        /* Список магазинов */
+        .shop-item { padding:15px; border-bottom:1px solid #eee; display:flex; align-items:center; }
+        .logo-box { width:40px;height:40px;background:#ddd;border-radius:8px;margin-right:12px;display:flex;align-items:center;justify-content:center;color:#777;font-weight:bold;}
+        .shop-name { font-weight: bold; font-size:16px; color:#212121; display:block; }
+        .shop-address { font-size:13px; color:#757575; word-break:break-word; }
+        
+        /* Нижняя навигация */
+        footer.nav-bar { 
+            position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid #E0E0E0; 
+            display:flex; justify-content:space-around; align-items:center; z-index:10;
+         }
+        .nav-btn { flex:1; text-align:center; cursor:pointer; font-size:14px; text-transform:uppercase; padding:10px; }
+        .active-nav { border-bottom:3px solid var(--accent-blue); color:var(--accent-blue); font-weight:bold; }
+        
+        /* Формы */
+        label { display:block; margin-bottom:8px; color:#212121; font-weight:bold; }
+        input, textarea { width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box; font-size:16px; }
+        button.action { width:100%; padding:14px; background-color:#2A8BF3; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:opacity 0.2s; }
+        button:hover { opacity:0.9; }
+        
+        /* Скрытие экранов */
+        .screen { display: none; height: calc(100vh - 56px); overflow-y:auto; padding:16px; }
+        .active { display: flex !important; flex-direction: column; }
     </style>
 </head>
 <body>
-    <!-- ЭКРАН №1 -->
-    <div id="home" class="screen active">
+
+<div class="container">
+    
+    <!-- ЭКРАН №1: Главная страница -->
+    <div id="screen-home" class="screen active">
         <header><h1>МАГАЗИНЫ</h1></header>
-        <div style="flex-grow:1; padding-bottom: 80px;">
+        
+        <div class="content">
+            <!-- Рекламная сетка -->
             <div class="ad-grid">
-                <div class="ad-block">Баннер 1</div><div class="ad-block">Баннер 2</div>
-                <div class="ad-block">Баннер 3</div><div class="ad-block">Баннер 4</div>
+                <div class="ad-block">Баннер 1</div>
+                <div class="ad-block">Баннер 2</div>
+                <div class="ad-block">Баннер 3</div>
+                <div class="ad-block">Баннер 4</div>
+                <div class="ad-block">Баннер 5</div>
+                <div class="ad-block">Баннер 6</div>
             </div>
-            <div style="margin-top:20px;">
-                <div class="shop-list-item"><div class="logo">M</div><div><strong>Пятёрочка</strong><br><small>ул. Тверская, д. 5</small></div></div>
-                <div class="shop-list-item"><div class="logo">V</div><div><strong>ВкусВилл</strong><br><small>Ленинский пр-т</small></div></div>
+
+            <!-- Список магазинов -->
+            <div style="margin-top: 20px;" id="shops-list">
+                <p style='text-align:center;color:#757575;'>Список пуст.</p>
             </div>
         </div>
-        <footer>
-            <button class="nav-btn nav-active" onclick="show('register')">Предприниматель</button>
-            <button class="nav-btn" onclick="alert('Режим покупателя')">Покупатель</button>
-            <button class="nav-btn" onclick="alert('Админка')">Админ</button>
+
+        <!-- Навигация внизу -->
+        <footer class="nav-bar">
+            <button class="nav-btn active-nav" onclick="showScreen('register')">Предприниматель</button>
+            <button class="nav-btn" onclick="alert('Режим покупателя активен')">Покупатель</button>
+            <button class="nav-btn" onclick="alert('Раздел админа')">Админ</button>
         </footer>
     </div>
 
     <!-- ЭКРАН РЕГИСТРАЦИИ (№3) -->
-    <div id="register" class="screen
+    <div id="screen-register" class="screen">
+        <header>
+            <button class="back-btn" onclick="showScreen('home')">&larr;</button>
+            <h1>Регистрация владельца</h1>
+        </header>
+        <div class="content">
+            <form onsubmit="event.preventDefault(); alert('Форма отправлена в бэкенд'); showScreen('edit', 'Новый Магазин');">
+                <label>Логин:</label>
+                <input type="text" name="login" placeholder="Например, ivan_shop" required>
+                
+                <label>Пароль:</label>
+                <input type="password" name="pass" placeholder="Ваш пароль" required>
+                
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ЭКРАН РЕДАКТИРОВАНИЯ КАРТОЧКИ (№4/№5) -->
+    <div id="screen-edit" class="screen">
+        <header>
+            <button class="back-btn" onclick="showScreen('home')">&larr;</button>
+            <h1>Редактирование магазина</h1>
+        </header>
+        <div class="content">
+            <form onsubmit="event.preventDefault(); alert('Данные сохранены в БД'); showScreen('home');">
+                <label>Название:</label>
+                <input type="text" id="inp-name" value="" required>
+                
+                <label>Адрес:</label>
+                <input type="text" id="inp-address" value="" required>
+                
+                <label>Описание / Услуги:</label>
+                <textarea id="inp-desc" rows="4"></textarea>
+                
+                <label>Соцсети:</label>
+                <input type="text" id="inp-social" placeholder="@instagram, t.me/channel">
+                
+                <button type="submit">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<!-- СКРИПТ ПЕРЕКЛЮЧЕНИЯ ЭКРАНОВ -->
+<script>
+function showScreen(id, dataObj){
+    // Скрываем все экраны
+    document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+    
+    // Показываем нужный
+    const target = document.getElementById('screen-' + id);
+    if(target){
+        target.classList.add('active');
+        
+        // Если передали данные объекта (для редактирования), заполняем поля
+        if(dataObj && typeof dataObj === 'object'){
+             document.getElementById('inp-name').value = dataObj.name || "";
+             document.getElementById('inp-address').value = dataObj.address || "";
+             document.getElementById('inp-desc').value = dataObj.description || "";
+             document.getElementById('inp-social').value = dataObj.social_links || "";
+        }
+    }
+    
+    // Управление кнопками в футере
+    document
